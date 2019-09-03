@@ -14,6 +14,8 @@ table = dynamodb.Table('Quotes')
 
 
 
+
+
 def format_object(line):
 
     if line["Category"] == "":
