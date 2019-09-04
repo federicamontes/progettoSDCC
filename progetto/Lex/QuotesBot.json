@@ -1,0 +1,31 @@
+{
+    "intents": [
+        {
+            "intentVersion": "$LATEST",
+            "intentName": "QuotesIntent"
+        }
+    ],
+    "name": "QuotesBotModel",
+    "locale": "en-US",
+    "abortStatement": {
+        "messages": [
+            {
+                "content": "Sorry, I'm not able to assist right now",
+                "contentType": "PlainText"
+            }
+        ]
+    },
+    "clarificationPrompt": {
+        "maxAttempts": 2,
+        "messages": [
+            {
+                "content": "I didn't understand you, can you repeat?",
+                "contentType": "PlainText"
+            }
+        ]
+    },
+    "voiceId": "Salli",
+    "childDirected": false,
+    "idleSessionTTLInSeconds": 600,
+    "description": "Bot to receive a quote about a Category or an Author based on the behalf of a user"
+}

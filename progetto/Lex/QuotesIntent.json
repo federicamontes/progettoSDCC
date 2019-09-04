@@ -1,0 +1,74 @@
+{
+  "name": "QuotesIntent",
+  "sampleUtterances": [
+    "Give me a quote about {Category} by {Author}",
+    "Find me a quote about {Category} by {Author}",
+    "I want a quote about {Category} by {Author}",
+    "Quote about {Category} by {Author}",
+    "Send a quote about {Category} by {Author}",
+    "Give me a quotea about by {Author}",
+    "Find me a quote by {Author}",
+    "I want a quote by {Author}",
+    "Quote by {Author}",
+    "Send me a quote by {Author}",
+    "Give me a quote about {Category}",
+    "Find me a quote about {Category}",
+    "I want a quote about {Category}",
+    "Quote about {Category}",
+    "Send me a quote about {Category}"
+  ],
+  "slots": [
+    {
+      "slotType": "QuotesCategory",
+      "name": "Category",
+      "slotConstraint": "Required",
+      "valueElicitationPrompt": {
+        "maxAttempts": 2,
+        "messages": [
+          {
+            "content": "What type of category would you like to choose?",
+            "contentType": "PlainText"
+          }
+        ]
+      },
+      "priority": 1,
+      "slotTypeVersion": "$LATEST",
+      "sampleUtterances": [
+        "Give me a quote about {Category}",
+        "Find me a quote about {Category}",
+        "I want a quote about {Category}",
+        "Quote about {Category}",
+        "Send me a quote about {Category}"
+      ],
+      "description": "The type of category to choose"
+    },
+    {
+      "slotType": "QuotesAuthor",
+      "name": "Author",
+      "slotConstraint": "Required",
+      "valueElicitationPrompt": {
+        "maxAttempts": 2,
+        "messages": [
+          {
+            "content": "What author would you like to choose?",
+            "contentType": "PlainText"
+          }
+        ]
+      },
+      "priority": 2,
+      "slotTypeVersion": "$LATEST",
+      "sampleUtterances": [
+        "Give me a quotea about by {Author}",
+        "Find me a quote by {Author}",
+        "I want a quote by {Author}",
+        "Quote by {Author}",
+        "Send me a quote by {Author}"
+      ],
+      "description": "The author to choose"
+    }
+  ],
+  "fulfillmentActivity": {
+    "type": "ReturnIntent"
+  },
+  "description": "Intent to return the quote receved"
+}

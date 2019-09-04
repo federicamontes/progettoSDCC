@@ -1,0 +1,99 @@
+{
+  "enumerationValues": [
+    {
+      "value": "arts"
+    },
+    {
+      "value": "books"
+    },
+    {
+      "value": "death"
+    },
+    {
+      "value": "education"
+    },
+    {
+      "value": "faith"
+    },
+    {
+      "value": "friendship"
+    },
+    {
+      "value": "god"
+    },
+    {
+      "value": "happiness"
+    },
+    {
+      "value": "hope"
+    },
+    {
+      "value": "humor"
+    },
+    {
+      "value": "inspiration"
+    },
+    {
+      "value": "knowledge"
+    },
+    {
+      "value": "life"
+    },
+    {
+      "value": "love"
+    },
+    {
+      "value": "mind"
+    },
+    {
+      "value": "motivation"
+    },
+    {
+      "value": "philosophy"
+    },
+    {
+      "value": "poetry"
+    },
+    {
+      "value": "positive"
+    },
+    {
+      "value": "purpose"
+    },
+    {
+      "value": "quotes"
+    },
+    {
+      "value": "relationship"
+    },
+    {
+      "value": "religion"
+    },
+    {
+      "value": "romance"
+    },
+    {
+      "value": "science"
+    },
+    {
+      "value": "soul"
+    },
+    {
+      "value": "success"
+    },
+    {
+      "value": "truth"
+    },
+    {
+      "value": "wisdom"
+    },
+    {
+      "value": "writing"
+    },
+    {
+      "value": "other"
+    }
+  ],
+  "name": "QuotesCategory",
+  "description": "Types of available categories"
+}
