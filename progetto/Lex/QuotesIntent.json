@@ -45,7 +45,7 @@
     {
       "slotType": "QuotesAuthor",
       "name": "Author",
-      "slotConstraint": "Required",
+      "slotConstraint": "Optional",
       "valueElicitationPrompt": {
         "maxAttempts": 2,
         "messages": [
@@ -68,7 +68,11 @@
     }
   ],
   "fulfillmentActivity": {
-    "type": "ReturnIntent"
+    "type": "CodeHook",
+    "codeHook": {
+      "uri": "arn:aws:lambda:region:ACCOUNT ID:function:lambdaDynamo",
+      "messageVersion": "1.0"
+    }
   },
   "description": "Intent to return the quote receved"
 }
