@@ -1,14 +1,7 @@
+import json
 import boto3
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, Attr, And
 from random import randrange
-
-
-def getRandomIndex(len_quotes):
-    if len_quotes == 1:
-        index = 0
-    else:
-        index = randrange(len_quotes)
-    return index
 
 
 # always start with the lambda_handler
@@ -19,49 +12,56 @@ def getQuote(author, category):
     # select the table
     table = dynamodb.Table("Quotes")
 
-    items = table.query(KeyConditionExpression=Key('Category').eq(category))
-    len_quotes = len(items['Items'])
-    print(len_quotes)
+    if (author == ""):
+        items = table.query(KeyConditionExpression=Key('Category').eq(category))
 
-    if author == "":
-        if len_quotes == 0:
+        lenQuotes = len(items['Items'])
+        print(lenQuotes)
+
+        if (lenQuotes == 0):
             return "No quotes!"
+        if (lenQuotes == 1):
+            index = 0
         else:
-            index = getRandomIndex(len_quotes)
-            print(items['Items'][index]['Category'])
-            return str(items['Items'][index]['Quote']) + " by " + str(items['Items'][index]['Author'])
+            index = randrange(lenQuotes)
+
+        return str(items['Items'][index]['Quote']) + " by " + str(items['Items'][index]['Author'])
 
     else:
+
+        itemsCat = table.query(KeyConditionExpression=Key('Category').eq(category))
+
         response = []
 
-        for i in range(len(items['Items'])):
-            if (author in items['Items'][i]['Author']):
-                print(items['Items'][i]['Quote'])
-                response.append(items['Items'][i])
+        for i in range(len(itemsCat['Items'])):
+            if (author in itemsCat['Items'][i]['Author']):
+                print(itemsCat['Items'][i]['Quote'])
+                response.append(itemsCat['Items'][i])
                 print('\n')
 
-    len_quotes = len(response)
-    print(len_quotes)
+        lenQuotes = len(response)
+        print(lenQuotes)
 
-    if len_quotes == 0:
-        return "No quotes!"
-    if len_quotes == 1:
-        index = 0
-    else:
-        index = randrange(len_quotes)
+        if (lenQuotes == 0):
+            return "No quotes!"
+        if (lenQuotes == 1):
+            index = 0
+        else:
+            index = randrange(lenQuotes)
 
-    return str(response[index]['Quote']) + " by " + str(response[index]['Author'])
+        return str(response[index]['Quote']) + " by " + str(response[index]['Author'])
 
 
 def lambda_handler(event, context):
+    print('received request: ' + str(event))
     category = event['currentIntent']['slots']['Category']
     author = event['currentIntent']['slots']['Author']
 
+    if author == 'any':
+        author = ""
+
     if category == 'any':
         category = 'other'
-    #if author == 'null':
-    if author is None:
-        author = ""
 
     quote = getQuote(author, category)
 
