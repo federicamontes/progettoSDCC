@@ -1,0 +1,10 @@
+#node.js
+mkdir lambda-atlas-create-doc
+cd lambda-atlas-create-doc
+npm init
+npm install <module> --save (es. mongodb)
+#infine inserire il file <source>.py
+
+#python
+zip <destination>.zip <source>.py
+pip install --target <directory> <module> (es.pymongo[srv])
