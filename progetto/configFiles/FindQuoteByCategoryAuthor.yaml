@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  FindQuoteByCategoryAuthor:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: find_quote_category_author.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 20
+      Role: 'arn:aws:iam::268810246503:role/LambdaDynamoSQS-role'
+      Environment:
+        Variables:
+          MONGODB_ATLAS_CLUSTER_URI: >-
+            mongodb+srv://adminMongoDB:adminMongoDB@clusterquotes-qnz49.mongodb.net/admin?retryWrites=true&w=majority

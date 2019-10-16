@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  InsertNewQuote:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: insert_quote.handler
+      Runtime: nodejs10.x
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::268810246503:role/robomaker_students'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+        Api2:
+          Type: Api
+          Properties:
+            Path: /MyResource
+            Method: ANY
+      Environment:
+        Variables:
+          MONGODB_ATLAS_CLUSTER_URI: >-
+            mongodb+srv://adminMongoDB:adminMongoDB@clusterquotes-qnz49.mongodb.net/admin?retryWrites=true&w=majority
