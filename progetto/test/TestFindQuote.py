@@ -77,8 +77,15 @@ def lambda_handler(category, author):
 
 if (__name__ == "__main__"):
 
-    category = "life"
-    author = "any"
+    if sys.argv[1] == '0':
+
+        category = "life"
+        author = "any"
+        path = './testFindQuoteByCategoryAndAuthor.csv'
+    else:
+        category = "sport"
+        author = "any"
+        path = './testPublishToTopic.csv'
 
     for i in range (100):
         start = time.time ()
@@ -88,7 +95,7 @@ if (__name__ == "__main__"):
         end = time.time ()
         elapsed = end - start
 
-        with open ('./testFindQuoteByCategoryAndAuthor.csv', mode='a') as test_file:
+        with open (path, mode='a') as test_file:
             test_writer = csv.writer (test_file, delimiter=';')
             test_writer.writerow ([elapsed])
 
