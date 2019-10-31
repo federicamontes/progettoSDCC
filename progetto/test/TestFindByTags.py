@@ -75,11 +75,18 @@ def lambda_handler(startTime):
 
 if __name__ == "__main__":
 
+    client = boto3.client ('lambda')
 
     for i in range (100):
+        
         start = time.time ()
 
-        response = lambda_handler(start)
+        #response = lambda_handler(start)
+        response = client.invoke (
+            FunctionName='arn:aws:lambda:us-east-1:638927402797:function:FindQuoteByTags',
+            InvocationType='RequestResponse',
+            Payload=json.dumps ('{"Category":"sports", "Author":"any"}')
+        )
 
 
 
