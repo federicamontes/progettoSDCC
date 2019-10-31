@@ -77,6 +77,8 @@ def lambda_handler(category, author):
 
 if (__name__ == "__main__"):
 
+    client = boto3.client('lambda')
+
     if sys.argv[1] == '0':
 
         category = "life"
@@ -90,7 +92,12 @@ if (__name__ == "__main__"):
     for i in range (100):
         start = time.time ()
 
-        response = lambda_handler (category, author)
+        #response = lambda_handler (category, author)
+        response = client.invoke (
+            FunctionName='LAMBDA_ARN',
+            InvocationType='RequestResponse',
+            Payload=json.dumps('./input.json')
+        )
 
         end = time.time ()
         elapsed = end - start

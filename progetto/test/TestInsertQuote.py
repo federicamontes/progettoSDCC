@@ -15,7 +15,7 @@ if (__name__ == "__main__"):
         start = time.time ()
 
         response = client.invoke (
-            FunctionName='arn:aws:lambda:us-east-1:638927402797:function:InsertNewQuote',
+            FunctionName='LAMBDA_ARN',
             InvocationType='Event',
             Payload=json.dumps("Don't cry because it's over, smile because it happened. By Dr. Seuss")
         )
