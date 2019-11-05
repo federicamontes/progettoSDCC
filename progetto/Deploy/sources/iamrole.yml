@@ -1,0 +1,189 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'A simple SiPY template for deploy'
+
+Resources:
+  AdminRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWSConfigRole'
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Sid: AssumeRole1
+              Effect: Allow
+              Principal:
+                Service: 'lambda.amazonaws.com'
+              Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: execution
+          PolicyDocument:
+            Statement:
+              #AWSLambdaFullAccess
+              - Effect: Allow
+                Action:
+                  - 'cloudformation:DescribeChangeSet'
+                  - 'cloudformation:DescribeStackResources'
+                  - 'cloudformation:DescribeStacks'
+                  - 'cloudformation:GetTemplate'
+                  - 'cloudformation:ListStackResources'
+                  - 'cloudwatch:*'
+                  - 'cognito-identity:ListIdentityPools'
+                  - 'cognito-sync:GetCognitoEvents'
+                  - 'cognito-sync:SetCognitoEvents'
+                  - 'dynamodb:*'
+                  - 'ec2:DescribeSecurityGroups'
+                  - 'ec2:DescribeSubnets'
+                  - 'ec2:DescribeVpcs'
+                  - 'events:*'
+                  - 'iam:GetPolicy'
+                  - 'iam:GetPolicyVersion'
+                  - 'iam:GetRole'
+                  - 'iam:GetRolePolicy'
+                  - 'iam:ListAttachedRolePolicies'
+                  - 'iam:ListRolePolicies'
+                  - 'iam:ListRoles'
+                  - 'iam:PassRole'
+                  - 'iot:AttachPrincipalPolicy'
+                  - 'iot:AttachThingPrincipal'
+                  - 'iot:CreateKeysAndCertificate'
+                  - 'iot:CreatePolicy'
+                  - 'iot:CreateThing'
+                  - 'iot:CreateTopicRule'
+                  - 'iot:DescribeEndpoint'
+                  - 'iot:GetTopicRule'
+                  - 'iot:ListPolicies'
+                  - 'iot:ListThings'
+                  - 'iot:ListTopicRules'
+                  - 'iot:ReplaceTopicRule'
+                  - 'kinesis:DescribeStream'
+                  - 'kinesis:ListStreams'
+                  - 'kinesis:PutRecord'
+                  - 'kms:ListAliases'
+                  - 'lambda:*'
+                  - 'logs:*'
+                  - 's3:*'
+                  - 'sns:ListSubscriptions'
+                  - 'sns:ListSubscriptionsByTopic'
+                  - 'sns:ListTopics'
+                  - 'sns:Publish'
+                  - 'sns:Subscribe'
+                  - 'sns:Unsubscribe'
+                  - 'sqs:ListQueues'
+                  - 'sqs:SendMessage'
+                  - 'tag:GetResources'
+                  - 'xray:PutTelemetryRecords'
+                  - 'xray:PutTraceSegments'
+                Resource: "*"
+                #AmazonAPIGatewayInvokeFullAccess
+              - Effect: Allow
+                 Action:
+                  - 'execute-api:Invoke'
+                  - 'execute-api:ManageConnections'
+                Resource: 'arn:aws:execute-api:*:*:*'
+              #CloudWatchFullAccess
+              #- Effect: Allow
+              #  Action:
+              #    - 'autoscaling:Describe*'
+              #    - 'cloudwatch:*'
+              #    - 'logs:*'
+              #    - 'sns:*'
+              #    - 'iam:GetPolicy'
+              #    - 'iam:GetPolicyVersion'
+              #    - 'iam:GetRole'
+              #  Resource: "*"
+              - Effect: Allow
+                Action:
+                  - 'iam:CreateServiceLinkedRole'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/events.amazonaws.com/AWSServiceRoleForCloudWatchEvents*'
+                Condition:
+                  StringLike:
+                    'iam:AWSServiceName': 'events.amazonaws.com'
+              #AmazonAPIGatewayAdministrator
+              - Effect: Allow
+                Action:
+                  - 'apigateway:*'
+                Resource: 'arn:aws:apigateway:*::/*'
+              #AWSLambdaExecute
+              - Effect: Allow
+                Action:
+                  - 'logs:*'
+                Resource: 'arn:aws:logs:*:*:*'
+              - Effect: Allow
+                Action:
+                  - 's3:GetObject'
+                  - 's3:PutObject'
+                Resource: 'arn:aws:s3:::*'
+              #AmazonLexFullAccess
+              - Effect: Allow
+                Action:
+                  - 'cloudwatch:GetMetricStatistics'
+                  - 'cloudwatch:DescribeAlarms'
+                  - 'cloudwatch:DescribeAlarmsForMetric'
+                  - 'kms:DescribeKey'
+                  - 'kms:ListAliases'
+                  - 'lambda:GetPolicy'
+                  - 'lambda:ListFunctions'
+                  - 'lex:*'
+                  - 'polly:DescribeVoices'
+                  - 'polly:SynthesizeSpeech'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'lambda:AddPermission'
+                  - 'lambda:RemovePermission'
+                Resource: 'arn:aws:lambda:*:*:function:AmazonLex*'
+                Condition:
+                  StringLike:
+                    'lambda:Principal': 'lex.amazonaws.com'
+              - Effect: Allow
+                Action:
+                  - 'iam:GetRole'
+                  - 'iam:DeleteRole'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'iam:CreateServiceLinkedRole'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/lex.amazonaws.com/AWSServiceRoleForLexBots'
+                Condition:
+                  StringLike:
+                    'iam:AWSServiceName': 'lex.amazonaws.com'
+              - Effect: Allow
+                Action:
+                  - 'iam:DeleteServiceLinkedRole'
+                  - 'iam:GetServiceLinkedRoleDeletionStatus'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/lex.amazonaws.com/AWSServiceRoleForLexBots'
+              - Effect: Allow
+                Action:
+                  - 'iam:DetachRolePolicy'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/lex.amazonaws.com/AWSServiceRoleForLexBots'
+                Condition:
+                  StringLike:
+                    'iam:PolicyArn': 'arn:aws:iam::aws:policy/aws-service-role/AmazonLexBotPolicy'
+              - Effect: Allow
+                Action:
+                  - 'iam:CreateServiceLinkedRole'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/channels.lex.amazonaws.com/AWSServiceRoleForLexChannels'
+                Condition:
+                  StringLike:
+                    'iam:AWSServiceName': 'channels.lex.amazonaws.com'
+              - Effect: Allow
+                Action:
+                  - 'iam:DeleteServiceLinkedRole'
+                  - 'iam:GetServiceLinkedRoleDeletionStatus'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/channels.lex.amazonaws.com/AWSServiceRoleForLexChannels'
+              - Effect: Allow
+                Action:
+                  - 'iam:DetachRolePolicy'
+                Resource: 'arn:aws:iam::*:role/aws-service-role/channels.lex.amazonaws.com/AWSServiceRoleForLexChannels'
+                Condition:
+                  StringLike:
+                     'iam:PolicyArn': 'arn:aws:iam::aws:policy/aws-service-role/LexChannelPolicy'
+                #AmazonSNSFullAccess
+              - Effect: Allow
+                Action:
+                  - 'sns:*'
+                Resource: '*'
+      RoleName: 'AdminRole'
+

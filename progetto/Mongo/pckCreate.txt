@@ -7,4 +7,4 @@ npm install <module> --save (es. mongodb)
 
 #python
 zip <destination>.zip <source>.py
-pip install --target <directory> <module> (es.pymongo[srv])
+pip install --target <directory> <module> (es.pymongo[srv] requests)

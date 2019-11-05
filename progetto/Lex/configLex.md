@@ -15,7 +15,7 @@ $ aws lambda create-function \
 --function-name lambdaDynamo \
 --zip-file fileb://get_quote.zip \
 --handler get_quote.lambda_handler \
---runtime python3.7 --role arn:aws:iam:: iam Account role \
+--runtime python3.7 --role arn:aws:iam::268810246503:role/lambda-role \
 --timeout 30 --memory-size 256 
 ```
 ####update
@@ -37,7 +37,7 @@ aws lambda add-permission \
 --function-name lambdaDynamo \
 --statement-id LexGettingStarted-QuotesBotModel \
 --action lambda:InvokeFunction --principal lex.amazonaws.com \
---source-arn "arn:aws:lex:region:Account ID:intent:QuotesIntent:*"
+--source-arn "arn:aws:lex:us-east-1:268810246503:intent:QuotesIntent:*"
 ```
 
 ## 4.customize intent model
