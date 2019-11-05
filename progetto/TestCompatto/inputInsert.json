@@ -1,0 +1,13 @@
+{
+    "token":"UVXkkh7O5j9587apFLE8uzIH",
+    "team_id": "TMAKE144W",
+    "team_domain": "py-jako",
+    "channel_id": "DPDRAPMT5",
+    "channel_name": "directmessage",
+    "user_id": "UM8194DB6",
+    "user_name": "dilettalagom",
+    "command": "/insert",
+    "text":"That which does not kill us makes us stronger. by Friedrich Nietzsche",
+    "response_url":"https://hooks.slack.com/commands/TMAKE144W/818756587527/VWqE1Gm46mshMctHnBooQgrl",
+    "trigger_id": "816435299972.724660038166.cbfe59241f7eb9ac2d01a580a47588d6"
+}
