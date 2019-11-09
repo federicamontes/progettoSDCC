@@ -169,7 +169,7 @@ Resources:
       CodeUri: ./target/FindQuoteByCategoryAuthor.zip
       Description: 'Lambda function for Category and Author research in MongoAtlas'
       MemorySize: 128
-      Timeout: 80
+      Timeout: 7
       Role: !GetAtt AdminRole.Arn
       Events:
         CloudWatchEvent1:
@@ -193,7 +193,7 @@ Resources:
       CodeUri: ./target/FindQuoteByTags.zip
       Description: 'Lambda function for Tags research in MongoAtlas'
       MemorySize: 128
-      Timeout: 130
+      Timeout: 6
       Role: !GetAtt AdminRole.Arn
       Events:
         CloudWatchEvent1:
@@ -223,7 +223,7 @@ Resources:
       CodeUri: ./target/InsertNewQuote.zip
       Description: 'Lambda function for execute insert new Quote in MongoAtlas'
       MemorySize: 128
-      Timeout: 3
+      Timeout: 4
       Role: !GetAtt AdminRole.Arn
       Events:
         Api1:

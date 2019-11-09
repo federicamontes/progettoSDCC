@@ -19,7 +19,8 @@ Per creare un <em>comando Slack</em> che è utilizzato per l'inserimeto delle nu
             
 
 ###Lato Server
-Per creare un'instanza delle risorse Lambda, SNS e API Gateway usate nel lato server dell'applicazione SiPY è necessario deployare il template YAML, in cui sono elencate tutte le risorse necessarie a ricreare la logica dell'applicazione con le relative specifiche.
+Per creare un'istanza delle risorse Lambda, SNS e API Gateway usate nel lato server dell'applicazione SiPY è necessario deployare il template YAML, 
+in cui sono elencate tutte le risorse necessarie a ricreare la logica dell'applicazione con le relative specifiche.
 
 - creazione del bucket S3: è necessario un container in cui caricare il codice eseguibile delle funzioni lambda 
     (<b>NOTA</b>: i bucket devono avere un nome esclusivamente lower-case)

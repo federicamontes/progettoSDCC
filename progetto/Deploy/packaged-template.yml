@@ -153,10 +153,10 @@ Resources:
     Properties:
       Handler: find_quote_category_author_sns.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://sipy/5072cad145669620d11082c9b0547aee
+      CodeUri: s3://sipy/e48f549b0d0c5d49e8156cd9b2feadaa
       Description: Lambda function for Category and Author research in MongoAtlas
       MemorySize: 128
-      Timeout: 80
+      Timeout: 7
       Role:
         Fn::GetAtt:
         - AdminRole
@@ -178,10 +178,10 @@ Resources:
     Properties:
       Handler: find_quotes_tags_sns.lambda_handler
       Runtime: python3.6
-      CodeUri: s3://sipy/37f7b207cf152fd745ed05271d832d8a
+      CodeUri: s3://sipy/94efd343143935e84b6a162388ced750
       Description: Lambda function for Tags research in MongoAtlas
       MemorySize: 128
-      Timeout: 130
+      Timeout: 6
       Role:
         Fn::GetAtt:
         - AdminRole
@@ -209,10 +209,10 @@ Resources:
     Properties:
       Handler: insert_quote.handler
       Runtime: nodejs10.x
-      CodeUri: s3://sipy/7d0f94714c7d024fb992397ac1a8979e
+      CodeUri: s3://sipy/662280abc1c8a614c81c7fd071cd56cd
       Description: Lambda function for execute insert new Quote in MongoAtlas
       MemorySize: 128
-      Timeout: 3
+      Timeout: 4
       Role:
         Fn::GetAtt:
         - AdminRole
